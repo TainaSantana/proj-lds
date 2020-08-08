@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Pauta {% endblock %}
+
+{% block content %}
+<br>
+<div class="container marketing">
+    <h2 class="display-4">Conheça nossa equipe incrível!</h2>
+    <br><br>
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+      <div class="col-lg-4">
+        <img src="{% static 'img/3263.jpg' %}" alt="..." class="rounded-circle" width="173" height="165">
+    
+        <h3>Tainá Santana</h3>
+        <p class="lead">Redatora</p>
+        <p><img class="icone" src="{% static 'img/linkedin2.png' %}" alt="Linkedin" width="25" height="25"> 
+            <img class="icone" src="{% static 'img/facebook2.png' %}" alt="facebook" width="25" height="25"> 
+            <img class="icone" src="{% static 'img/twitter2.png' %}" alt="Twitter" width="25" height="25">
+        </p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img src="{% static 'img/4186.jpg' %}" alt="..." class="rounded-circle" width="173" height="165">
+        <h3>Tainá S.</h3>
+        <p class="lead">CEO</p>
+        <p><img class="icone" src="{% static 'img/linkedin2.png' %}" alt="Linkedin" width="25" height="25"> 
+            <img class="icone" src="{% static 'img/facebook2.png' %}" alt="facebook" width="25" height="25"> 
+            <img class="icone" src="{% static 'img/twitter2.png' %}" alt="Twitter" width="25" height="25">
+        </p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img src="{% static 'img/310.jpg' %}" alt="..." class="rounded-circle" width="173" height="165">
+        <h3>Tainazinha</h3>
+        <p class="lead">Diretora de Arte</p>
+        <p><img class="icone" src="{% static 'img/linkedin2.png' %}" alt="Linkedin" width="25" height="25"> 
+            <img class="icone" src="{% static 'img/facebook2.png' %}" alt="facebook" width="25" height="25"> 
+            <img clas="ucone" src="{% static 'img/twitter2.png' %}" alt="Twitter" width="25" height="25">
+        </p>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+{% endblock %}

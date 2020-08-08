@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Teste de email</h1>
+    <form action="#" method="POST">
+        {% csrf_token %}
+        <input type="text" name="assunto" placeholder="teste oi">
+        <input type="submit" class="btn btn-success" value="Enviar">
+    </form>
+{% endblock %}

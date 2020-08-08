@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %} Lista de Reuniões {% endblock %}
+
+{% block content %}
+
+<h1 class="mt-5">  Reuniões Agendadas</h1>
+{% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="alert alert-{{message.tags}}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+
+        </ul>
+    {% endif %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nova mensagem</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/sendemail" method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Assunto:</label>
+                <input type="text" class="form-control" name="assunto" id="recipient-name">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Mensagem:</label>
+                <textarea class="form-control" name="mensagem" id="message-text"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <input type="submit" class="btn btn-success" value="Enviar">
+          </div>
+        </div>
+      </div>
+    </div>
+{% for reuniao in reunioes %}
+
+<div class="card" style="width: 800px;">
+    
+    <div class="card-body">
+      <h5 class="card-title"><a href="/reuniao/{{reuniao.id}}"></a>{{reuniao.titulo}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted"><a href="/reuniao/{{reuniao.id}}"></a>Data: {{reuniao.data_inicio}}</h6>
+      <p class="card-text"><a href="/reuniao/{{reuniao.id}}"></a>Descrição: {{reuniao.descricao}}</p>
+      <a href="editmeet/{{reuniao.id}}" class="card-link"><i class="fas fa-edit"></i> Editar</a>
+      <a href="/pauta/{{reuniao.id}}" class="card-link"><i class="fas fa-file-alt"></i> Ver pauta</a>
+      <a href="/sendemail" class="card-link" data-toggle="modal" data-target="#exampleModal"><i class="far fa-paper-plane"></i> Enviar Convites</a>
+      <a href="deletemeet/{{reuniao.id}}" class="delete-btn"><i class="far fa-window-close"></i> Cancelar reunião</a>
+    </div>
+</div>
+<br>
+{% endfor %}
+    <br>
+  <br>
+  <div class="pagination">
+    <span class="step-links">
+      {% if reunioes.has_previous %}
+        <a href="?page={{ reunioes.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
+      {% endif %}
+
+      <span class="current">
+        {{ reunioes.number }} de {{ reunioes.paginator.num_pages}}
+      </span>
+
+      {% if reunioes.has_next %}
+        <a href="?page={{ reunioes.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
+      {% endif %}
+
+    </span>
+  </div>
+{% endblock %}
