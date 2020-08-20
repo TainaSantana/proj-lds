@@ -13,35 +13,37 @@
 
         </ul>
     {% endif %}
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nova mensagem</h5>
+            <h5 class="modal-title" id="id_titulo_modal">E-mail</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <form action="/sendemail" method="POST">
+            <form action="/email/{{reuniao.id}}" method="POST">
               {% csrf_token %}
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Assunto:</label>
-                <input type="text" class="form-control" name="assunto" id="recipient-name">
+                <label for="id_email" class="col-form-label">Destinatário:</label>
+                <input type="email" class="form-control" name="email" id="id_email">
               </div>
+              
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Mensagem:</label>
-                <textarea class="form-control" name="mensagem" id="message-text"></textarea>
+                <input type="text" class="form-control" name="descricao" id="id_descricao" value="{{reuniao.descricao}}">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <input type="submit" class="btn btn-success" value="Enviar">
               </div>
             </form>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-            <input type="submit" class="btn btn-success" value="Enviar">
-          </div>
+          
         </div>
       </div>
-    </div>
+    </div>-->
 {% for reuniao in reunioes %}
 
 <div class="card" style="width: 800px;">
@@ -52,7 +54,7 @@
       <p class="card-text"><a href="/reuniao/{{reuniao.id}}"></a>Descrição: {{reuniao.descricao}}</p>
       <a href="editmeet/{{reuniao.id}}" class="card-link"><i class="fas fa-edit"></i> Editar</a>
       <a href="/pauta/{{reuniao.id}}" class="card-link"><i class="fas fa-file-alt"></i> Ver pauta</a>
-      <a href="/sendemail" class="card-link" data-toggle="modal" data-target="#exampleModal"><i class="far fa-paper-plane"></i> Enviar Convites</a>
+      <a href="email/{{reuniao.id}}" class="card-link" data-toggle="modal" data-target="#exampleModal"><i class="far fa-paper-plane"></i> Enviar Convites</a>
       <a href="deletemeet/{{reuniao.id}}" class="delete-btn"><i class="far fa-window-close"></i> Cancelar reunião</a>
     </div>
 </div>
@@ -66,9 +68,11 @@
         <a href="?page={{ reunioes.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
       {% endif %}
 
+      {% if reunioes.paginator.num_pages %}
       <span class="current">
         {{ reunioes.number }} de {{ reunioes.paginator.num_pages}}
       </span>
+      {% endif %}
 
       {% if reunioes.has_next %}
         <a href="?page={{ reunioes.next_page_number }}"><i class="fas fa-arrow-right"></i></a>

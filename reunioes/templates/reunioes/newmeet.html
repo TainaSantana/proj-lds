@@ -8,10 +8,41 @@
         
         <form method="POST">
             {% csrf_token %}
-            {{ form|bootstrap }}
+            <!--{{ form|bootstrap }}-->
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="id_titulo">Título da Reunião</label>
+                    <input type="text" class="form-control" name="titulo" required id="id_titulo" maxlength="255">
+                  </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="id_data_inicio">Data de início</label>
+                        <input type="text" class="form-control" name="data_inicio" required id="id_data_inicio" placeholder="dd/mm/aaaa">
+                    </div>
+                    
+                    <div class="form-group col-md-4">
+                    <label for="id_data_fim">Data de término</label>
+                    <input type="text" class="form-control" name="data_fim" required id="id_data_fim" placeholder="dd/mm/aaaa">
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="id_descricao">Descrição</label>
+                  <textarea class="form-control" name="descricao" id="id_descricao" rows="7"></textarea>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="id_pauta">Pauta</label>
+                    <textarea class="form-control" name="pauta" id="id_pauta" rows="7"></textarea>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="id_email"> E-mails</label>
+                      <textarea class="form-control" name="email" id="id_email" rows="7"></textarea>
+                    </div>
+                  </div>
+               
             <input type="submit" class="btn btn-success" value="Cadastrar Reunião">
-            <br>
-
         </form>
         
 

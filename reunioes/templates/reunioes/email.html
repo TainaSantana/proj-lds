@@ -1,9 +1,20 @@
 {% extends 'base.html' %}
+{% block title %} Contato {% endblock %}
 {% block content %}
-    <h1>Teste de email</h1>
-    <form action="#" method="POST">
-        {% csrf_token %}
-        <input type="text" name="assunto" placeholder="teste oi">
-        <input type="submit" class="btn btn-success" value="Enviar">
-    </form>
+<h1>Envio de E-mail</h1>
+<hr>
+
+    <form method="POST">
+        {%csrf_token%}
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="id_email"> E-mails</label>
+              <input type="email" class="form-control" name="email" id="id_email">
+            </div>
+          </div>
+            <input type="submit" name="send" value="Enviar e-mail">
+            
+            </form>
+
+
 {% endblock %}

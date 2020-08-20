@@ -8,5 +8,7 @@ urlpatterns = [
     path('newmeet/', views.newMeet, name='new-meet'),
     path('editmeet/<int:id>', views.editMeet, name='edit-meet'),
     path('deletemeet/<int:id>', views.deleteMeet, name='delete-meet'),
-    path('email/', views.sendEmail, name='send-email'),
+    path('email/<int:id>', views.emailMeet, name='email-meet'),
+    path('search', views.search, name='search'),
+    #path('email/', views.sendEmail, name='send-email'),
 ]
